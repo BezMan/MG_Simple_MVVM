@@ -31,15 +31,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         internal fun AppCompatActivity.replaceFragment(frameId: Int, fragment: Fragment) {
-            supportFragmentManager.doTransaction { replace(frameId, fragment) }
+            supportFragmentManager.doTransaction { replace(frameId, fragment, "First") }
         }
 
-        internal fun AppCompatActivity.addFragment(
-            frameId: Int,
-            fragment: Fragment,
-            fragName: String
-        ) {
-            supportFragmentManager.doTransaction { add(frameId, fragment, "").addToBackStack(fragName) }
+        internal fun AppCompatActivity.addFragment(frameId: Int, fragment: Fragment, fragName: String) {
+            supportFragmentManager.doTransaction { add(frameId, fragment, fragName).addToBackStack(fragName) }
         }
 
         const val FRAGMENT_DATA = "FRAGMENT_DATA"

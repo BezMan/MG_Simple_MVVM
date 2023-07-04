@@ -19,14 +19,14 @@ class MyViewModel : ViewModel() {
 
     fun fetchData() {
         viewModelScope.launch(dispatcher) {
-            val articles = App.myTasks
+            val articles = ApiImplFactory.tasksImpl.getArticles()
             _viewState.postValue(articles)
         }
     }
 
-    fun addItemToList(myTask: MyTask){
-        App.myTasks.add(myTask)
-        _viewState.postValue(App.myTasks)
+    fun addItemToList(myTask: MyTask) {
+        _viewState.value?.add(myTask)
+        _viewState.postValue(_viewState.value)
     }
 
 

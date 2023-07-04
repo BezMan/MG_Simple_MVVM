@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.mg.databinding.FragmentSecondBinding
 
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: MyViewModel by activityViewModels()
 
     private var isExistingNote: Boolean = false
     private lateinit var currentNote: MyTask
@@ -40,14 +42,10 @@ class SecondFragment : Fragment() {
 
     }
 
-    private val parentActivity: MainActivity by lazy {
-        requireActivity() as MainActivity
-    }
-
     private fun initUI() {
         binding.saveBtn.setOnClickListener {
-            parentActivity.viewModel.addItemToList(MyTask(taskId, binding.edittext.text.toString()))
-//            finish()
+            viewModel.addItemToList(MyTask(taskId, binding.edittext.text.toString()))
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 

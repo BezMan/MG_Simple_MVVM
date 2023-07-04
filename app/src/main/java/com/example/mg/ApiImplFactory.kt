@@ -7,8 +7,8 @@ object ApiImplFactory {
     }
 
     private fun create(): ApiImpl {
-//        return FakeArticlesApi()
-        return ArticlesApi()
+        return FakeArticlesApi()
+//        return ArticlesApi()
     }
 
 }
@@ -21,21 +21,19 @@ internal interface ApiImpl {
 private class ArticlesApi : ApiImpl {
 
     override fun getArticles(): MutableList<MyTask> {
-        return mutableListOf(MyTask(111, "hello", ))
+        return mutableListOf()
     }
 }
 
-//private class FakeArticlesApi : ApiImpl {
-//
-//    override fun getArticles(): Articles? {
-//        // Get the JSON data
-//        val jsonString = Consts.jsonRaw
-//
-//        val articles = Gson().fromJson(jsonString, Articles::class.java)
-//
-//        return articles
-//    }
-//
-//
-//}
+private class FakeArticlesApi : ApiImpl {
+
+    override fun getArticles(): MutableList<MyTask> {
+        return mutableListOf(
+            MyTask(111, "hello",false),
+            MyTask(222, "yoyo", true)
+        )
+    }
+
+
+}
 
