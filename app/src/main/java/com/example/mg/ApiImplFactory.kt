@@ -17,14 +17,14 @@ object ApiImplFactory {
 }
 
 internal interface ApiImpl {
-    fun getArticles(): MutableList<MyTask>
+    fun getArticles(): List<MyTask>
 }
 
 
 private class ArticlesApi : ApiImpl {
 
-    override fun getArticles(): MutableList<MyTask> {
-        return NoteRepository().getAllNotes().value ?: mutableListOf()
+    override fun getArticles(): List<MyTask> {
+        return NoteRepository().getAllNotes().value ?: listOf()
     }
 }
 

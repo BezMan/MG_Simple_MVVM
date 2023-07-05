@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.mg.data.MyTask
 import com.example.mg.databinding.FragmentSecondBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 class SecondFragment : Fragment() {
@@ -25,7 +28,9 @@ class SecondFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.currentTask = null
         _binding = null
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,14 +48,19 @@ class SecondFragment : Fragment() {
             val text = binding.edittext.text.toString()
             val status = binding.checkboxToggleButton.isChecked
 
-            val id = viewModel.currentTask?.id
-            val myTask: MyTask = if (id == null) {
-                MyTask(text, status)
+            val currentTask = viewModel.currentTask
+            val myTask: MyTask
+            if (currentTask == null) {
+                myTask = MyTask(text, status)
+                CoroutineScope(Dispatchers.IO).launch {
+                    val id = viewModel.insert(myTask)
+                }
+
             } else {
-                MyTask(text, status, id = id)
+                val id = currentTask.id
+                myTask = MyTask(text, status, id = id)
+                viewModel.update(myTask)
             }
-            viewModel.currentTask = myTask
-            viewModel.addItemToList(viewModel.currentTask!!)
 
             requireActivity().supportFragmentManager.popBackStack()
         }
@@ -59,12 +69,11 @@ class SecondFragment : Fragment() {
     private fun checkIsExistingNote() {
         val currentTask = viewModel.currentTask
 
-        if (currentTask != null) { // EXISTING task to edit
-            binding.edittext.setText(currentTask.description)
-            binding.checkboxToggleButton.isChecked = currentTask.status
+        currentTask?.let {
+            binding.edittext.setText(it.description)
+            binding.checkboxToggleButton.isChecked = it.status
         }
     }
-
 
 }
 

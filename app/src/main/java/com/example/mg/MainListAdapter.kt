@@ -53,13 +53,13 @@ class MainListAdapter internal constructor(context: OnItemClickListener) : ListA
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MyTask>() {
             override fun areItemsTheSame(oldNote: MyTask, newNote: MyTask): Boolean {
-                return false
-//                return oldNote.id == newNote.id
+//                return false
+                return oldNote.id == newNote.id
             }
 
             override fun areContentsTheSame(oldNote: MyTask, newNote: MyTask): Boolean {
-                return false
-//                return oldNote.id == newNote.id && oldNote.description == newNote.description && oldNote.status == newNote.status
+//                return false
+                return oldNote.description == newNote.description
             }
         }
     }

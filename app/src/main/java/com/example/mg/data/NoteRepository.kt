@@ -31,7 +31,7 @@ class NoteRepository {
         return noteDao.getNoteById(noteId)
     }
 
-    fun getAllNotes(): LiveData<MutableList<MyTask>> {
+    fun getAllNotes(): LiveData<List<MyTask>> {
         return noteDao.getAllNotesByPriority()
     }
 }

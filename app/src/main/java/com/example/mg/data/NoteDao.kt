@@ -23,7 +23,7 @@ interface NoteDao {
     fun deleteAllNotes()
 
     @Query("SELECT * FROM note_table ORDER BY timestamp DESC")
-    fun getAllNotesByPriority(): LiveData<MutableList<MyTask>>
+    fun getAllNotesByPriority(): LiveData<List<MyTask>>
 
     @Query("SELECT * FROM note_table WHERE id = :noteId")
     fun getNoteById(noteId: Long): LiveData<MyTask>

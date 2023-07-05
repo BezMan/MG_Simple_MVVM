@@ -37,7 +37,7 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
 
         initUI()
 
-        viewModel.fetchData()
+//        viewModel.fetchData()
 
     }
 
@@ -70,8 +70,8 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
 
 
     private fun observeResponse() {
-        viewModel.viewState.observe(viewLifecycleOwner) { response ->
-            displayData(response)
+        viewModel.getAllNotes().observe(viewLifecycleOwner) {
+            displayData(it)
         }
     }
 
