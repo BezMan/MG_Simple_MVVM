@@ -1,4 +1,4 @@
-package com.example.mg
+package com.example.mg.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -43,26 +43,29 @@ class SecondFragment : Fragment() {
 
     private fun initUI() {
         binding.saveBtn.setOnClickListener {
+            saveBtnClicked()
+        }
+    }
 
-            val text = binding.edittext.text.toString()
-            val status = binding.checkboxToggleButton.isChecked
+    private fun saveBtnClicked() {
+        val text = binding.edittext.text.toString()
+        val status = binding.checkboxToggleButton.isChecked
 
-            val currentTask = viewModel.currentTask
-            val myTask: MyTask
-            if (currentTask == null) {
-                myTask = MyTask(text, status)
-                CoroutineScope(Dispatchers.IO).launch {
-                    val id = viewModel.insert(myTask)
-                }
-
-            } else {
-                val id = currentTask.id
-                myTask = MyTask(text, status, id = id)
-                viewModel.update(myTask)
+        val currentTask = viewModel.currentTask
+        val myTask: MyTask
+        if (currentTask == null) {
+            myTask = MyTask(text, status)
+            CoroutineScope(Dispatchers.IO).launch {
+                val id = viewModel.insert(myTask)
             }
 
-            requireActivity().supportFragmentManager.popBackStack()
+        } else {
+            val id = currentTask.id
+            myTask = MyTask(text, status, id = id)
+            viewModel.update(myTask)
         }
+
+        requireActivity().supportFragmentManager.popBackStack()
     }
 
     private fun checkIsExistingNote() {

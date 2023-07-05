@@ -19,7 +19,7 @@ class NoteRepository {
         repoScope.launch { noteDao.update(myTask) }
     }
 
-    fun delete(myTask: MyTask) {
+    fun delete(myTask: MyTask){
         noteDao.delete(myTask)
     }
 

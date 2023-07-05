@@ -1,4 +1,4 @@
-package com.example.mg
+package com.example.mg.views
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mg.R
 import com.example.mg.data.MyTask
 
 class MainListAdapter internal constructor(context: OnItemClickListener) : ListAdapter<MyTask, MainListAdapter.ArticleHolder>(
@@ -35,6 +36,9 @@ class MainListAdapter internal constructor(context: OnItemClickListener) : ListA
             itemView.setOnClickListener {
                 listener.onItemClick(currentTask)
             }
+            itemView.setOnLongClickListener {
+                listener.onItemLongClick(currentTask)
+            }
 
         }
 
@@ -42,7 +46,8 @@ class MainListAdapter internal constructor(context: OnItemClickListener) : ListA
 
 
     interface OnItemClickListener {
-        fun onItemClick(note: MyTask)
+        fun onItemClick(task: MyTask)
+        fun onItemLongClick(task: MyTask): Boolean
     }
 
     inner class ArticleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

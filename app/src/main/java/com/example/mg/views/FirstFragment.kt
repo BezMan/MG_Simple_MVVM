@@ -1,4 +1,4 @@
-package com.example.mg
+package com.example.mg.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mg.MainActivity.Companion.addFragment
+import com.example.mg.R
 import com.example.mg.data.MyTask
 import com.example.mg.databinding.FragmentFirstBinding
+import com.example.mg.views.MainActivity.Companion.addFragment
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
 
@@ -77,8 +82,16 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
     }
 
 
-    override fun onItemClick(note: MyTask) {
-        editTask(note)
+    override fun onItemClick(task: MyTask) {
+        editTask(task)
+    }
+
+    override fun onItemLongClick(task: MyTask): Boolean {
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.delete(task)
+            Snackbar.make(binding.notesLayout, "deleted - ${task.description}", Snackbar.LENGTH_LONG).show()
+        }
+        return true
     }
 
 }

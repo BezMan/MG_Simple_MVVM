@@ -1,4 +1,4 @@
-package com.example.mg
+package com.example.mg.views
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +18,10 @@ class MyViewModel : ViewModel() {
 
     fun update(task: MyTask) {
         repository.update(task)
+    }
+
+    fun delete(task: MyTask) {
+        repository.delete(task)
     }
 
 

@@ -1,12 +1,12 @@
-package com.example.mg
+package com.example.mg.views
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.mg.R
 import com.example.mg.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -36,19 +36,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.doTransaction { add(frameId, fragment, fragName).addToBackStack(fragName) }
         }
 
-        const val FRAGMENT_DATA = "FRAGMENT_DATA"
-
-        const val EXTRA_NOTE = "EXTRA_NOTE"
-        const val ID_NOTE = "ID_NOTE"
-        const val EXTRA_IS_ARCHIVED = "EXTRA_IS_ARCHIVED"
-
-        fun View.toggleShowView(show: Boolean) {
-            visibility = if (show) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-        }
     }
 }
 
