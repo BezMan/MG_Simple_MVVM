@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.mg.databinding.FragmentSecondBinding
+import java.util.UUID
 
 class SecondFragment : Fragment() {
 
@@ -14,9 +15,6 @@ class SecondFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: MyViewModel by activityViewModels()
 
-    private var isExistingNote: Boolean = false
-    private lateinit var currentNote: MyTask
-    private var taskId: Long = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
@@ -40,29 +38,34 @@ class SecondFragment : Fragment() {
 
     private fun initUI() {
         binding.saveBtn.setOnClickListener {
-            viewModel.addItemToList(MyTask(taskId, binding.edittext.text.toString()))
+
+            val text = binding.edittext.text.toString()
+            val status = binding.checkboxToggleButton.isChecked
+
+            val id = viewModel.currentTask?.id!!
+//            val id = viewModel.currentTask?.id!!
+            val myTask = MyTask(id, text, status)
+
+            viewModel.currentTask = myTask
+
+            viewModel.addItemToList(viewModel.currentTask!!)
+
             requireActivity().supportFragmentManager.popBackStack()
         }
     }
 
     private fun checkIsExistingNote() {
-//        isExistingNote = intent.hasExtra(MainActivity.EXTRA_NOTE)
-//        if (isExistingNote) {
-//
-//            currentNote = intent.getParcelableExtra(MainActivity.EXTRA_NOTE)!!
-//            taskId = currentNote.id
-//            binding.edittext.setText(currentNote.description)
-//
-//        } else { //NEW NOTE
-////            noteId = random long
-//            currentNote = MyTask(taskId)
-//        }
+        val currentTask = viewModel.currentTask
+
+        if (currentTask != null) { // EXISTING task to edit
+            binding.edittext.setText(currentTask.description)
+            binding.checkboxToggleButton.isChecked = currentTask.status
+        } else { // NEW task
+            val id = UUID.randomUUID().node()
+            viewModel.currentTask = MyTask(id)
+        }
     }
 
-    fun addTask() {
-//            val intent = Intent(this, DetailActivity::class.java)
-//            startActivity(intent)
-    }
 
 }
 

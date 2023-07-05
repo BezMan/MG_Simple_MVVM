@@ -16,6 +16,7 @@ class MyViewModel : ViewModel() {
     val viewState: LiveData<MutableList<MyTask>>
         get() = _viewState
 
+    internal var currentTask: MyTask? = null
 
     fun fetchData() {
         viewModelScope.launch(dispatcher) {

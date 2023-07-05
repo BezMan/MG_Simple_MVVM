@@ -9,11 +9,19 @@
     android:orientation="vertical">
 
     <EditText
-        android:hint="enter text"
         android:id="@+id/edittext"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_margin="20dp" />
+        android:layout_margin="20dp"
+        android:hint="enter text" />
+
+    <CheckBox
+        android:id="@+id/checkbox_toggle_button"
+        style="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/colorPrimary"
+        tools:checked="true" />
 
     <Button
         android:id="@+id/saveBtn"

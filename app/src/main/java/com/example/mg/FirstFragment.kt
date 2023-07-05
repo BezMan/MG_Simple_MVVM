@@ -63,9 +63,8 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
     }
 
     fun editTask(task: MyTask) {
-//            val intent = Intent(this, DetailActivity::class.java)
-//            intent.putExtra(EXTRA_NOTE, task)
-//            startActivity(intent)
+        viewModel.currentTask = task
+        parentActivity.addFragment(R.id.fragment_container, SecondFragment(), "Second")
     }
 
 
