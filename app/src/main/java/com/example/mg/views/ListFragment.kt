@@ -16,13 +16,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
+class ListFragment : Fragment(), ListFragmentAdapter.OnItemClickListener {
 
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: MyViewModel by activityViewModels()
+    private val viewModel: MutualViewModel by activityViewModels()
 
-    private lateinit var mainListAdapter: MainListAdapter
+    private lateinit var listFragmentAdapter: ListFragmentAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
@@ -52,8 +52,8 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
         //RECYCLER
         binding.recView.layoutManager = LinearLayoutManager(requireActivity())
         binding.recView.setHasFixedSize(true)
-        mainListAdapter = MainListAdapter(this)
-        binding.recView.adapter = mainListAdapter
+        listFragmentAdapter = ListFragmentAdapter(this)
+        binding.recView.adapter = listFragmentAdapter
 
 //        //CLICKS
         binding.fabAddNote.setOnClickListener {
@@ -62,12 +62,12 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
     }
 
     fun addTask() {
-        parentActivity.addFragment(R.id.fragment_container, SecondFragment(), "Second")
+        parentActivity.addFragment(R.id.fragment_container, DetailFragment(), "Second")
     }
 
     fun editTask(task: MyTask) {
         viewModel.currentTask = task
-        parentActivity.addFragment(R.id.fragment_container, SecondFragment(), "Second")
+        parentActivity.addFragment(R.id.fragment_container, DetailFragment(), "Second")
     }
 
 
@@ -78,7 +78,7 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
     }
 
     private fun displayData(list: List<MyTask>) {
-        mainListAdapter.submitList(list)
+        listFragmentAdapter.submitList(list)
     }
 
 

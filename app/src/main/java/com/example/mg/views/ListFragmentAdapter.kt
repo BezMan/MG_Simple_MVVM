@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mg.R
 import com.example.mg.data.MyTask
 
-class MainListAdapter internal constructor(context: OnItemClickListener) : ListAdapter<MyTask, MainListAdapter.ArticleHolder>(
+class ListFragmentAdapter internal constructor(context: OnItemClickListener) : ListAdapter<MyTask, ListFragmentAdapter.ArticleHolder>(
     DIFF_CALLBACK
 ) {
     private var listener: OnItemClickListener = context

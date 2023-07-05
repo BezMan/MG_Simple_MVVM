@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.mg.data.MyTask
 import com.example.mg.data.NoteRepository
 
-class MyViewModel : ViewModel() {
+class MutualViewModel : ViewModel() {
 
     private val repository = NoteRepository()
 

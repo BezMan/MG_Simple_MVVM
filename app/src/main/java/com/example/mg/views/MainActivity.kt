@@ -1,7 +1,6 @@
 package com.example.mg.views
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        replaceFragment(R.id.fragment_container, FirstFragment())
+        replaceFragment(R.id.fragment_container, ListFragment())
     }
 
 
