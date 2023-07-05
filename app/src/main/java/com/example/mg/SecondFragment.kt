@@ -11,7 +11,6 @@ import com.example.mg.databinding.FragmentSecondBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.UUID
 
 class SecondFragment : Fragment() {
 

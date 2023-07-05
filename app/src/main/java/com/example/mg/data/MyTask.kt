@@ -8,10 +8,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "note_table")
-data class MyTask( val description: String = "",
-                      val status: Boolean = false,
-                      val timestamp: String = "",
-                      @PrimaryKey(autoGenerate = true) var id: Long = 0
+data class MyTask(val description: String = "",
+                  val status: Boolean = false,
+                  val timestamp: Long = System.currentTimeMillis(),
+                  @PrimaryKey(autoGenerate = true) var id: Long = 0
 
 ) : Parcelable {
 

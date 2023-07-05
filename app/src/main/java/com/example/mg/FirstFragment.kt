@@ -36,9 +36,6 @@ class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
         observeResponse()
 
         initUI()
-
-//        viewModel.fetchData()
-
     }
 
     private val parentActivity: MainActivity by lazy {
