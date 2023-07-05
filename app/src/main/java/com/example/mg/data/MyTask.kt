@@ -1,15 +1,20 @@
-package com.example.mg
+package com.example.mg.data
+
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MyTask(
-    val id: Long,
-    val description: String = "",
-    val status: Boolean = false,
-    val timestamp: String = ""
-): Parcelable {
+@Entity(tableName = "note_table")
+data class MyTask( val description: String = "",
+                      val status: Boolean = false,
+                      val timestamp: String = "",
+                      @PrimaryKey(autoGenerate = true) var id: Long = 0
+
+) : Parcelable {
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -27,6 +32,8 @@ data class MyTask(
         result = 31 * result + timestamp.hashCode()
         return result
     }
+
 }
+
 
 

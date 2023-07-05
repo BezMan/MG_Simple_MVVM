@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.mg.data.MyTask
 import com.example.mg.databinding.FragmentSecondBinding
 import java.util.UUID
 
@@ -42,12 +43,13 @@ class SecondFragment : Fragment() {
             val text = binding.edittext.text.toString()
             val status = binding.checkboxToggleButton.isChecked
 
-            val id = viewModel.currentTask?.id!!
-//            val id = viewModel.currentTask?.id!!
-            val myTask = MyTask(id, text, status)
-
+            val id = viewModel.currentTask?.id
+            val myTask: MyTask = if (id == null) {
+                MyTask(text, status)
+            } else {
+                MyTask(text, status, id = id)
+            }
             viewModel.currentTask = myTask
-
             viewModel.addItemToList(viewModel.currentTask!!)
 
             requireActivity().supportFragmentManager.popBackStack()
@@ -60,9 +62,6 @@ class SecondFragment : Fragment() {
         if (currentTask != null) { // EXISTING task to edit
             binding.edittext.setText(currentTask.description)
             binding.checkboxToggleButton.isChecked = currentTask.status
-        } else { // NEW task
-            val id = UUID.randomUUID().node()
-            viewModel.currentTask = MyTask(id)
         }
     }
 

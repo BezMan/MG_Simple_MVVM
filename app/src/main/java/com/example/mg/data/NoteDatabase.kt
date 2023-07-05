@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Note::class], version = 1, exportSchema = false)
+@Database(entities = [MyTask::class], version = 1, exportSchema = false)
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao

@@ -1,59 +1,38 @@
 package com.example.mg.data
 
+import androidx.lifecycle.LiveData
 import com.example.mg.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class NoteRepository : IRepository {
+class NoteRepository {
 
     private val noteDao: NoteDao = App.database.noteDao()
     private val repoScope = CoroutineScope(Dispatchers.IO)
 
-    init {
-        getAllNotes()
+    fun insert(myTask: MyTask): Long {
+        return noteDao.insert(myTask)
     }
 
-    override fun insert(note: Note): Long {
-        return noteDao.insert(note)
+    fun update(myTask: MyTask) {
+        repoScope.launch { noteDao.update(myTask) }
     }
 
-    override fun insert(note: List<Note>): List<Long> {
-        return noteDao.insert(note)
+    fun delete(myTask: MyTask) {
+        noteDao.delete(myTask)
     }
 
-    override fun update(note: Note) {
-        repoScope.launch { noteDao.update(note) }
-    }
-
-    override fun delete(note: Note) {
-        noteDao.delete(note)
-    }
-
-    override fun deleteAllNotes() {
-        noteDao.deleteAllNotes()
-    }
-
-    override fun clearAllData() {
+    fun clearAllData() {
         App.database.clearAllTables()
     }
 
-    override fun resetAllNotifications() {
-        noteDao.resetAllNotifications()
-    }
-
-    override fun getNoteById(noteId: Long): Flow<Note> {
+    fun getNoteById(noteId: Long): LiveData<MyTask> {
         return noteDao.getNoteById(noteId)
     }
 
-    override fun getAllNotes(): Flow<List<Note>> {
+    fun getAllNotes(): LiveData<MutableList<MyTask>> {
         return noteDao.getAllNotesByPriority()
     }
-
-    override fun getArchivedNotes(): Flow<List<Note>> {
-        return noteDao.getAllArchivedNotesByPriority()
-    }
-
 }
 

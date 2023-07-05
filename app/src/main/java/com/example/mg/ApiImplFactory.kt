@@ -1,5 +1,8 @@
 package com.example.mg
 
+import com.example.mg.data.MyTask
+import com.example.mg.data.NoteRepository
+
 object ApiImplFactory {
 
     internal val tasksImpl by lazy {
@@ -7,8 +10,8 @@ object ApiImplFactory {
     }
 
     private fun create(): ApiImpl {
-        return FakeArticlesApi()
-//        return ArticlesApi()
+//        return FakeArticlesApi()
+        return ArticlesApi()
     }
 
 }
@@ -21,7 +24,7 @@ internal interface ApiImpl {
 private class ArticlesApi : ApiImpl {
 
     override fun getArticles(): MutableList<MyTask> {
-        return mutableListOf()
+        return NoteRepository().getAllNotes().value ?: mutableListOf()
     }
 }
 
@@ -29,8 +32,8 @@ private class FakeArticlesApi : ApiImpl {
 
     override fun getArticles(): MutableList<MyTask> {
         return mutableListOf(
-            MyTask(111, "hello",false),
-            MyTask(222, "yoyo", true)
+            MyTask("hello",false),
+            MyTask("yoyo", true)
         )
     }
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mg.MainActivity.Companion.addFragment
+import com.example.mg.data.MyTask
 import com.example.mg.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment(), MainListAdapter.OnItemClickListener {
