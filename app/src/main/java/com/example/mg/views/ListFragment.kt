@@ -11,6 +11,7 @@ import com.example.mg.R
 import com.example.mg.data.MyTask
 import com.example.mg.databinding.FragmentFirstBinding
 import com.example.mg.views.MainActivity.Companion.addFragment
+import com.example.mg.views.MainActivity.Companion.toggleShowView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -79,6 +80,9 @@ class ListFragment : Fragment(), ListFragmentAdapter.OnItemClickListener {
 
     private fun displayData(list: List<MyTask>) {
         listFragmentAdapter.submitList(list)
+        //no notes layout
+        binding.noNotesView.toggleShowView(list.isEmpty())
+
     }
 
 

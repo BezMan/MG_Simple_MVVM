@@ -9,7 +9,20 @@
     tools:context=".views.MainActivity">
 
 
-    <include layout="@layout/no_notes_layout" />
+    <TextView
+        android:id="@+id/no_notes_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="60dp"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="32sp"
+        android:textStyle="italic"
+        android:text="no notes yet... click action btn to add"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recView"

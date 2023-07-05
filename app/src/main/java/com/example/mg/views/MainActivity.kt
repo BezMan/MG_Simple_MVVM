@@ -1,6 +1,7 @@
 package com.example.mg.views
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -22,6 +23,14 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
+
+        fun View.toggleShowView(show: Boolean) {
+            visibility = if (show) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
 
         private inline fun FragmentManager.doTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
             beginTransaction().func().commit()
