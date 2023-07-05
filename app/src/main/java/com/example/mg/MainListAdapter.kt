@@ -56,9 +56,7 @@ class MainListAdapter internal constructor(context: OnItemClickListener) : ListA
             }
 
             override fun areContentsTheSame(oldNote: MyTask, newNote: MyTask): Boolean {
-//                return oldNote.localTime == newNote.localTime
-                return false
-
+                return oldNote.description == newNote.description && oldNote.status == newNote.status
             }
         }
     }

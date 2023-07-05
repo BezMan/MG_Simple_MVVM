@@ -18,11 +18,7 @@ class SecondFragment : Fragment() {
     private lateinit var currentNote: MyTask
     private var taskId: Long = -1
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         val view = binding.root
         return view

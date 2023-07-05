@@ -14,7 +14,7 @@ object ApiImplFactory {
 }
 
 internal interface ApiImpl {
-    fun getArticles(): MutableList<MyTask>?
+    fun getArticles(): MutableList<MyTask>
 }
 
 
