@@ -73,7 +73,7 @@ class ListFragment : Fragment(), ListFragmentAdapter.OnItemClickListener {
 
 
     private fun observeResponse() {
-        viewModel.getAllNotes().observe(viewLifecycleOwner) {
+        viewModel.taskListState.observe(viewLifecycleOwner) {
             displayData(it)
         }
     }

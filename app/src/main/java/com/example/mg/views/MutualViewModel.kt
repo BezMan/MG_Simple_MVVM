@@ -11,6 +11,9 @@ class MutualViewModel : ViewModel() {
 
     internal var currentTask: MyTask? = null
 
+    val taskListState: LiveData<List<MyTask>>
+        get() = repository.getAllNotes()
+
 
     fun insert(task: MyTask): Long {
         return repository.insert(task)
@@ -24,11 +27,6 @@ class MutualViewModel : ViewModel() {
         repository.delete(task)
     }
 
-
-    fun getNoteById(noteId: Long): LiveData<MyTask> = repository.getNoteById(noteId)
-
-    fun getAllNotes(): LiveData<List<MyTask>> = repository.getAllNotes()
-
-
+//    fun getNoteById(noteId: Long): LiveData<MyTask> = repository.getNoteById(noteId)
 
 }
