@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mg.R
 import com.example.mg.data.MyTask
 
-class ListFragmentAdapter internal constructor(context: OnItemClickListener) : ListAdapter<MyTask, ListFragmentAdapter.ArticleHolder>(
-    DIFF_CALLBACK
-) {
-    private var listener: OnItemClickListener = context
+class ListFragmentAdapter(private val listener: OnItemClickListener) : ListAdapter<MyTask, ListFragmentAdapter.ArticleHolder>(DIFF_CALLBACK) {
 
     internal fun getItemAtPosition(position: Int): MyTask {
         return getItem(position)
