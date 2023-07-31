@@ -3,7 +3,9 @@ package com.example.mg
 import android.app.Application
 import android.content.Context
 import com.example.mg.data.NoteDatabase
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class App : Application() {
 
     override fun onCreate() {
