@@ -6,10 +6,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoteRepository: IRepository {
+class MockRepository: IRepository {
 
     private val noteDao: NoteDao = App.database.noteDao()
     private val repoScope = CoroutineScope(Dispatchers.IO)
+
+    init {
+        insert(MyTask("hello", true))
+    }
 
     override fun insert(myTask: MyTask): Long {
         return noteDao.insert(myTask)
