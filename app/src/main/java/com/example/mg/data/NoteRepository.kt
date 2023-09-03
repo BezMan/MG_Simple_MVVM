@@ -1,38 +1,39 @@
 package com.example.mg.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.example.mg.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class NoteRepository: IRepository {
+class NoteRepository : IRepository {
 
     private val noteDao: NoteDao = App.database.noteDao()
-    private val repoScope = CoroutineScope(Dispatchers.IO)
 
-    override fun insert(myTask: MyTask): Long {
+    override suspend fun insert(myTask: MyTask): Long {
         return noteDao.insert(myTask)
     }
 
-    override fun update(myTask: MyTask) {
-        repoScope.launch { noteDao.update(myTask) }
+    override suspend fun update(myTask: MyTask) {
+        noteDao.update(myTask)
     }
 
-    override fun delete(myTask: MyTask){
+    override suspend fun delete(myTask: MyTask) {
         noteDao.delete(myTask)
     }
 
-    override fun clearAllData() {
+    override suspend fun clearAllData() {
         App.database.clearAllTables()
     }
 
     override fun getNoteById(noteId: Long): LiveData<MyTask> {
-        return noteDao.getNoteById(noteId)
+        return noteDao.getNoteById(noteId).asLiveData()
     }
 
     override fun getAllNotes(): LiveData<List<MyTask>> {
-        return noteDao.getAllNotesByPriority()
+        return noteDao.getAllNotesByPriority().asLiveData()
     }
 }
 

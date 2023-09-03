@@ -1,6 +1,5 @@
 package com.example.mg.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -23,9 +22,9 @@ interface NoteDao {
     fun deleteAllNotes()
 
     @Query("SELECT * FROM note_table ORDER BY timestamp DESC")
-    fun getAllNotesByPriority(): LiveData<List<MyTask>>
+    fun getAllNotesByPriority(): Flow<List<MyTask>>
 
     @Query("SELECT * FROM note_table WHERE id = :noteId")
-    fun getNoteById(noteId: Long): LiveData<MyTask>
+    fun getNoteById(noteId: Long): Flow<MyTask>
 }
 

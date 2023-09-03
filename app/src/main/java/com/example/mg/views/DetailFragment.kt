@@ -57,12 +57,15 @@ class DetailFragment : Fragment() {
             myTask = MyTask(text, status)
             CoroutineScope(Dispatchers.IO).launch {
                 val id = viewModel.insert(myTask)
+                val asd = id
             }
 
         } else {
             val id = currentTask.id
             myTask = MyTask(text, status, id = id)
-            viewModel.update(myTask)
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.update(myTask)
+            }
         }
 
         requireActivity().supportFragmentManager.popBackStack()

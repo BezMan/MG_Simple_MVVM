@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace 'com.example.mg'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.mg"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -54,6 +54,12 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.4.0'
     implementation 'androidx.activity:activity-ktx:1.7.2'
     implementation 'androidx.fragment:fragment-ktx:1.6.0'
+
+    //Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0-alpha01'
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
     //Room
     implementation "androidx.room:room-ktx:2.5.2"
